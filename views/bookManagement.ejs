@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Management</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <!-- Mind-blowing Glassmorphism Navbar -->
+    <nav class="navbar">
+        <a href="/" class="nav-brand">
+            <span class="material-icons-round">auto_stories</span>
+            BookSphere
+        </a>
+        <ul class="nav-links">
+            <li><a href="/">Explore</a></li>
+            <li><a href="/manage-books" class="active">Manage Library</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-header" style="margin-bottom: 1rem;">
+        <h1>Inventory Control</h1>
+    </div>
+
+    <div style="text-align: center; margin-bottom: 2rem;">
+        <a href="/add" class="btn btn-primary">
+            <span class="material-icons-round">add_circle</span>
+            Add New Book
+        </a>
+    </div>
+
+    <div class="table-container">
+        <% if(books && books.length> 0) { %>
+            <table class="modern-table">
+                <thead>
+                    <tr>
+                        <th>Cover</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Price</th>
+                        <th>Publish Date</th>
+                        <th style="text-align: center;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% books.forEach((b)=>{ %>
+                        <tr>
+                            <td><img src="<%= b.image %>" alt="<%= b.title %>"></td>
+                            <td style="font-weight: 600; color: var(--dark); max-width: 250px;">
+                                <%= b.title %>
+                            </td>
+                            <td style="color: #64748B;">
+                                <%= b.author %>
+                            </td>
+                            <td style="font-weight: 700; color: var(--primary);">₹<%= b.price %>
+                            </td>
+                            <td>
+                                <%= b.publish_date %>
+                            </td>
+                            <td>
+                                <div class="action-buttons" style="justify-content: center;">
+                                    <a href="/edit/<%= b.id %>" class="btn btn-primary btn-action" title="Edit">
+                                        <span class="material-icons-round" style="font-size: 18px;">edit</span>
+                                    </a>
+                                    <a href="/delete/<%= b.id %>" class="btn btn-danger btn-action" title="Delete"
+                                        onclick="return confirm('Are you sure you want to delete this legend?');">
+                                        <span class="material-icons-round" style="font-size: 18px;">delete</span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+            <% } else { %>
+                <div class="empty-state">
+                    <span class="material-icons-round"
+                        style="font-size: 4rem; color: #64748B; margin-bottom: 1rem;">inbox</span>
+                    <h3>The Library is Empty</h3>
+                    <p>Start populating the database by adding new literary works.</p>
+                </div>
+                <% } %>
+    </div>
+
+</body>
+
+</html>

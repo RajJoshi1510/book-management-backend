@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stunning BookStore</title>
+    <!-- Include Google Material Icons for UI enhancement -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    
+    <!-- Mind-blowing Glassmorphism Navbar -->
+    <nav class="navbar">
+        <a href="/" class="nav-brand">
+            <span class="material-icons-round">auto_stories</span>
+            BookSphere
+        </a>
+        <ul class="nav-links">
+            <li><a href="/" class="active">Explore</a></li>
+            <li><a href="/manage-books">Manage Library</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-header">
+        <h1>Bestselling Masterpieces</h1>
+    </div>
+
+    <div class="books-container">
+        <% if(books && books.length > 0) { %>
+            <% books.forEach((b) => { %>
+                <div class="book-card">
+                    <div class="book-image-container">
+                        <img src="<%= b.image %>" alt="<%= b.title %> Cover">
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title"><%= b.title %></h3>
+                        <p class="book-author">by <%= b.author %></p>
+                        <p class="book-desc"><%= b.description %></p>
+                        
+                        <div class="book-meta">
+                            <span class="book-price">₹<%= b.price %></span>
+                            <button class="btn btn-primary">
+                                <span class="material-icons-round" style="font-size: 18px;">shopping_cart</span>
+                                Buy Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <div class="empty-state" style="grid-column: 1 / -1;">
+                <span class="material-icons-round" style="font-size: 4rem; color: var(--primary); margin-bottom: 1rem;">library_books</span>
+                <h3>No Books Available</h3>
+                <p>Wait for the admin to add some legendary titles.</p>
+                <a href="/add" class="btn btn-primary">Add a Book</a>
+            </div>
+        <% } %>
+    </div>
+
+</body>
+</html>
